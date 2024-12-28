@@ -1,0 +1,7 @@
+#Installing Eksctl on Ubuntu 22.04
+
+Unlike AWS CLI, eksctl is not available to install using the default Ubuntu’s base repositories, therefore, we need to download it from its GitHub repository. Here is the commands:
+
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
