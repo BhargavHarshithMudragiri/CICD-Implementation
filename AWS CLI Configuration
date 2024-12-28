@@ -1,0 +1,17 @@
+To check if AWS CLI is configured or not, use command aws -version .
+
+If not installed, follow below steps:
+
+#Installing AWS CLI on Ubuntu 22.04
+sudo apt update
+sudo apt install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+
+After Install, configure AWS using below:
+
+aws configure
+
+#Enter your AWS Access Key ID, Secret Access Key, Region & Output format as JSON when prompted
