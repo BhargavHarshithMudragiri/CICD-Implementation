@@ -1,2 +1,2 @@
 # CICD-Implementation
-All Pre Requisites to develop a CICD pipeline using Jenkins
+All Pre Requisites to develop a CI pipeline using Jenkins and CD using Argo CD
