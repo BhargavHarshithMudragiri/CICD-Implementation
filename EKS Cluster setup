@@ -1,3 +1,6 @@
 #Setting up EKS Cluster of 8 nodes using Eksctl on Ubuntu 22.04
 
 eksctl create cluster --name java-app --nodegroup-name java-nodegroup --node-type t3.micro --nodes 8 --managed 
+
+#To Delete the  kubernetes cluster using eksctl, use below command
+eksctl delete cluster java-app
