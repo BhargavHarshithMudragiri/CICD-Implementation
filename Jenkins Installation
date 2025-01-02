@@ -1,11 +1,23 @@
-#Installing Jenkins on Ubuntu 22.04
+#Installing Jenkins on Ubuntu 24.04
 
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key |sudo gpg --dearmor -o /usr/share/keyrings/jenkins.gpg
-sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-sudo apt update
-sudo apt install Jenkins
-sudo systemctl start jenkins.service
-sudo systemctl status jenkins
+wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian/jenkins.io-2023.key
+
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+apt install fontconfig openjdk-17-jre -y
+
+apt-get update -y
+
+apt-get install jenkins -y
+
+systemctl enable jenkins
+
+systemctl start jenkins
+
+systemctl status jenkins
 
 
 After installing and starting Jenkins service, access the portal using - http://your_server_ip_or_domain:8080
