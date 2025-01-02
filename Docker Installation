@@ -1,20 +1,17 @@
-#Installing Docker on Ubuntu 22.04
+#Installing Docker on Ubuntu 24.04
 
 sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-apt-cache policy docker-ce
-sudo apt install docker-ce
-sudo systemctl status docker
+sudo apt update docker.io -y
+sudo systemctl start docker
 
 #Executing Docker without sudo
-
 By default, the docker command can only be run the root user or by a user in the docker group, which is automatically created during Docker’s installation process. If you attempt to run the docker command without prefixing it with sudo or without being in the docker group, you’ll get an error
 If you want to avoid typing sudo whenever you run the docker command, add your username to the docker group
 
-sudo usermod -aG docker ${USER}
+sudo usermod -aG docker jenkins
+sudo usermod -aG docker ubuntu
+sudo systemctl restart docker
+sudo chmod 666 /var/run/docker.sock
 
 To apply the new group membership, log out of the server and back in, or type the following:
 
@@ -26,5 +23,4 @@ Confirm that your user is now added to the docker group by typing:
 groups
 
 If you need to add a user to the docker group that you’re not logged in as, declare that username explicitly using:
-
 sudo usermod -aG docker username
