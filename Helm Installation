@@ -1,0 +1,7 @@
+#Steps to Install Helm on ubuntu 24.04
+
+Step 1: curl -O https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+
+Step 2: bash ./get-helm-3
+
+After Installed, check version using command: helm version
