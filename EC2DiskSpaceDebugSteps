@@ -1,0 +1,33 @@
+When you come across an issue as "No Space left on device" in your EC2 instance while running a project locally then you need to follow below steps to fix it.
+This issue requires you to resize the EBS Volume and Filesystem associated with it.
+How to do it ? Lets look into it...
+
+Step1: Verify the current disc usage of root directory(/) in linux machine.
+command: df -h
+
+Step2: Typically AWS gives you 8 GB standard storage volume when you launch EC2 instance. We need to increase this volume by going into EC2 instance volumes and modify it to 30GB
+       Once the volume state is modified and status shows InUse, you need to run few commands to resize the root filesystem(/dev/root).
+
+Step3: To check the updated EBS volume in linux instance, use below command. This command helps you in understanding the availble volume blocks Ex: xvda
+command: lsblk
+
+Result of above command is as below:
+Name       Size   Type   Mountpoints
+xvda       30G    disk   
+ - xvda1   7G     part   /        
+ - xvda16  913M   part   /boot
+
+If you observe above result, volume disk is updated to 30G where as partition mounted to root (/) is still not updated. So we need to grow the size of xvda1 partition to as much as disk size.
+
+3 Simple Steps to resize the filesystem.
+
+step1: Install Cloud Guest utils
+command: sudo apt-get install cloud-guest-utils
+
+step2: Grow Partition
+command: sudo growpart /dev/xvda 1
+
+step3: Resize the filesystem with growed partition block
+command: sudo resize2fs /dev/xvda1
+
+Now verify if your filesystem is updated with volume size by using command df -h
