@@ -38,4 +38,16 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt-get update
 sudo apt-get install jenkins -y
 
+##############################################################################################################
 
+Installing Jenkins on centOS using YUM utility
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install java-17-openjdk -y
+sudo yum update -y
+sudo curl -o /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum update -y
+sudo yum install jenkins -y
+sudo service start jenkins
